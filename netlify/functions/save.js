@@ -1,43 +1,38 @@
-const fs = require('fs');
-const path = require('path');
-const { writeFile } = require('fs').promises;
-
 exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+  if (event.httpMethod !== 'POST') return { statusCode: 405 };
 
+  const { data, level } = JSON.parse(event.body);
+  const token = process.env.GITHUB_TOKEN;
+  const repo = 'kpcarla01/elfaro-menu';
+  const path = 'menu.json';
+
+  let current = [];
   try {
-    const { data, level } = JSON.parse(event.body);
-    const filePath = path.resolve(__dirname, '../../menu.json');
-    
-    // Leer archivo actual
-    let current = [];
-    if (fs.existsSync(filePath)) {
-      current = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-    }
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+      headers: { Authorization: `token ${token}`, 'User-Agent': 'netlify' }
+    });
+    const file = await res.json();
+    current = JSON.parse(atob(file.content));
+  } catch (e) {}
 
-    // Actualizar según nivel
-    if (level === 'precio') {
-      data.forEach((row, i) => {
-        if (current[i]) current[i].Precio = row.Precio;
-      });
-    } else {
-      current = data;
-    }
-
-    // Guardar con formato bonito
-    await writeFile(filePath, JSON.stringify(current, null, 2), 'utf-8');
-    
-    return {
-      statusCode: 200,
-      body: 'exito: Menú actualizado correctamente'
-    };
-  } catch (error) {
-    console.error('Error:', error);
-    return {
-      statusCode: 500,
-      body: `Error: ${error.message}`
-    };
+  if (level === 'precio') {
+    data.forEach((row, i) => {
+      if (current[i]) current[i].Precio = row.Precio;
+    });
+  } else {
+    current = data;
   }
+
+  const content = btoa(JSON.stringify(current, null, 2));
+  const sha = (await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+    headers: { Authorization: `token ${token}`, 'User-Agent': 'netlify' }
+  }).then(r => r.json())).sha;
+
+  await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${token}`, 'User-Agent': 'netlify' },
+    body: JSON.stringify({ message: 'Actualizar menú', content, sha })
+  });
+
+  return { statusCode: 200, body: 'exito: Menú actualizado' };
 };
