@@ -20,7 +20,8 @@
     .item-price { color: #000; font-weight: bold; }
     .special-note { font-style: italic; font-size: 0.9rem; color: #666; margin-top: 5px; padding-left: 10px; }
     #parrilla { background-color: #1a1a1a; color: #fff; }
-    #parrilla h2, #parrilla .category h3, #parrilla .item-name, #parrilla .item-price { color: #fff; }
+    #parrilla h2 { color: #fff; border-bottom: 2px solid #fff; }
+    #parrilla .category h3, #parrilla .item-name, #parrilla .item-price { color: #fff; }
     #parrilla .special-note { color: #ddd; }
     footer { text-align: center; padding: 15px; background: #1a1a1a; color: #fff; font-size: 0.9rem; }
     .admin-link { text-align: center; padding: 10px; background: #333; color: #fff; }
@@ -37,7 +38,7 @@
     <div id="menu-content">Cargando menú...</div>
 
     <div class="admin-link">
-      <a href="/admin.html" target="_blank">Editar Precios (Admin)</a>
+      <a href="/admin.html" target="_blank">Editar Precios (Solo autorizados)</a>
     </div>
 
     <footer>
@@ -54,24 +55,40 @@
         let currentSection = '', currentSub = '';
 
         data.forEach(row => {
+          // Nueva sección
           if (row.Sección && row.Sección !== currentSection) {
-            currentSection = row.Sección; currentSub = '';
+            currentSection = row.Sección;
+            currentSub = '';
             const sec = document.createElement('section');
             if (row.Sección === 'Parrilla') sec.id = 'parrilla';
             sec.innerHTML = `<h2>${row.Sección}</h2><div class="category"></div>`;
             content.appendChild(sec);
           }
+
+          // Subsección
           if (row.Subsección && row.Subsección !== currentSub) {
             currentSub = row.Subsección;
             content.lastElementChild.querySelector('.category').innerHTML += `<h3>${row.Subsección}</h3>`;
           }
+
+          // Item y precio
           const cat = content.lastElementChild.querySelector('.category');
-          cat.innerHTML += `<div class="item"><span class="item-name">${row.Item}</span><span class="item-price">$ ${row.Precio}</span></div>`;
-          if (row.Nota) cat.innerHTML += `<div class="special-note">${row.Nota}</div>`;
+          cat.innerHTML += `
+            <div class="item">
+              <span class="item-name">${row.Item}</span>
+              <span class="item-price">$ ${row.Precio}</span>
+            </div>
+          `;
+
+          // Nota (ej: Fruta de estación + Vino blanco)
+          if (row.Nota) {
+            cat.innerHTML += `<div class="special-note">(${row.Nota})</div>`;
+          }
         });
       })
-      .catch(() => content.innerHTML = '<p style="color:red">Error al cargar el menú.</p>');
+      .catch(() => {
+        document.getElementById('menu-content').innerHTML = '<p style="color:red">Error al cargar el menú.</p>';
+      });
   </script>
 </body>
-
 </html>
