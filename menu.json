@@ -4,594 +4,881 @@
     "Subsección": "",
     "Item": "Empanada Dulce / Salada",
     "nota": "",
-    "Precio": "$1000"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Entradas",
     "Subsección": "",
     "Item": "Provoleta",
     "nota": "",
-    "Precio": "$5000"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Entradas",
     "Subsección": "",
     "Item": "Tabla de salame y queso",
     "nota": "",
-    "Precio": "$8000"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "",
     "Item": "Papas fritas",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "",
     "Item": "Papas fritas con huevo",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "",
     "Item": "Purè de papa",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "",
     "Item": "Purè de Zapallo",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "",
     "Item": "Purè Mixto",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "Ensaladas",
     "Item": "• Rúcula y Queso",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "Ensaladas",
     "Item": "• Zanahoria y Huevo",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "Ensaladas",
     "Item": "• Mixta",
-    "nota": "Lechuga, Tomate, Cebolla",
-    "Precio": "$"
+    "nota": "\"Lechuga",
+    "Precio": "Tomate"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "Ensaladas",
     "Item": "• Completa",
-    "nota": "Repollo Blanco y Morado, Cebolla, Tomate, Pimiento, Lechuga, Rúcula, Achicoria, Rabanito, Pepino, Huevo duro",
-    "Precio": "$"
+    "nota": "\"(Repollo Blanco y Morado",
+    "Precio": "Cebolla"
   },
   {
     "Sección": "Guarniciones",
     "Subsección": "Ensaladas",
     "Item": "• César",
-    "nota": "Lechuga, Queso en hebras, Croutons, Cherry, Salsa Worcestershire, Pollo",
-    "Precio": "$"
+    "nota": "\"(Lechuga",
+    "Precio": "Queso en hebras"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Completa",
     "Item": "Completa. Por persona",
     "nota": "Entrada de 1 empanada (dulce o salada) + 12 cortes + Cabrito + Guarniciones libres a elección.",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Compartida",
-    "Item": "Compartida. Para 2 personas",
-    "nota": "8 cortes (Bife de cuadril, Carne de Cerdo, Chorizo, Morcilla, Chinchulín, Riñón, Tira y Costilla de Cerdo) + 2 Guarniciones libre a elección.",
-    "Precio": "$"
+    "Item": "Compartida.  Para 2 personas",
+    "nota": "\"8 cortes (Bife de cuadril",
+    "Precio": "Carne de Cerdo"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Especial",
     "Item": "Especial",
-    "nota": "5 cortes (Bife, Tira, Chorizo, Morcilla y Matambre)",
-    "Precio": "$"
+    "nota": "\"5 cortes (Bife",
+    "Precio": "Tira"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Ejecutiva",
     "Item": "Ejecutiva",
-    "nota": "4 cortes a elección. Cabrito, Molleja, Matambre (Bife de cuadril, Carne de Cerdo, Chorizo, Morcilla, Chinchulín, Riñón, Tira y Costilla de cerdo)",
-    "Precio": "$"
-  },
-  {
-    "Sección": "Parrilla",
-    "Subsección": "Ejecutiva",
-    "Item": "Cubierto por persona (si se comparte el plato)",
-    "nota": "No incluye: guarnición.",
-    "Precio": "$"
+    "nota": "\"4 cortes a elección. Cabrito",
+    "Precio": "Molleja"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Cuadril",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Achuras",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Bife de Chorizo",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Matambre",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Cerdo",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Tira",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Entraña",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Pollo",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Parrilla",
     "Subsección": "Cortes sin Guarnición",
     "Item": "Cabrito",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Pastas",
     "Subsección": "",
     "Item": "Ñoquis",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Pastas",
     "Subsección": "",
     "Item": "Tallarin",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Pastas",
     "Subsección": "",
     "Item": "Sorrentinos",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Pastas",
     "Subsección": "",
     "Item": "Salsas: Boloñesa / Roja / Mixta / Crema",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Frutillas con crema",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Flan casero",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Budín de Pan",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Ensalada de Fruta",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Queso y Dulce",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Tiramisú",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Brownie con Helado",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Peras al Malbec",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Frutas en Almíbar",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "Adicional de Crema",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "",
     "Item": "o Dulce de Leche",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "Helados",
     "Item": "Helado con Baileys",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "Helados",
     "Item": "Helado en copa",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "Helados",
-    "Item": "Vainilla, Frutilla, Limón, Chocolate, Americana, Dulce de Leche",
-    "nota": "",
-    "Precio": ""
+    "Item": "\"Vainilla",
+    "nota": "Frutilla",
+    "Precio": "Limón"
   },
   {
     "Sección": "Postres",
     "Subsección": "Helados",
     "Item": "Helado Bombón Escocés",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Postres",
     "Subsección": "Helados",
     "Item": "Helado Almendrado",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Infusiones - Café",
     "Subsección": "",
     "Item": "Café chico",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Infusiones - Café",
     "Subsección": "",
     "Item": "Café jarrito",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Infusiones - Café",
     "Subsección": "",
     "Item": "Té",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Gaseosa 330 cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Línea Coca Cola y Pepsi",
     "nota": "",
-    "Precio": ""
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Agua c/gas 500cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Soda Sifón",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Agua Saborizada 500cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
-    "Item": "Pomelo, Manzana, Naranja",
-    "nota": "",
-    "Precio": ""
+    "Item": "\"Pomelo",
+    "nota": "Manzana",
+    "Precio": "Naranja\""
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Limonada Jarra 1L",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Limonada Jarra 1/2L",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "",
     "Item": "Terna Cuyano / Serrano",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Sin Alcohol",
     "Subsección": "Cerveza sin Alcohol",
     "Item": "Quilmes 350 ml",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Cervezas",
+    "Sección": "Cervezas con Alcohol",
+    "Subsección": "",
     "Item": "Patagonia 730cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Cervezas",
+    "Sección": "Cervezas con Alcohol",
+    "Subsección": "",
     "Item": "Stella Artois 975cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Cervezas",
+    "Sección": "Cervezas con Alcohol",
+    "Subsección": "",
     "Item": "Stella Artois Negra 473cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Cervezas",
+    "Sección": "Cervezas con Alcohol",
+    "Subsección": "",
     "Item": "Corona 710 cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Cervezas",
+    "Sección": "Cervezas con Alcohol",
+    "Subsección": "",
     "Item": "Corona 310 cc",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Especiales",
+    "Sección": "Especiales",
+    "Subsección": "",
     "Item": "Clericó 1L",
-    "nota": "Fruta de estación + Vino blanco",
-    "Precio": "$"
+    "nota": "(Fruta de estación + Vino blanco)",
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Especiales",
+    "Sección": "Especiales",
+    "Subsección": "",
     "Item": "Clericó 1L",
-    "nota": "Especialidad de El Faro",
-    "Precio": "$"
+    "nota": "(Especialidad de El Faro)",
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Especiales",
+    "Sección": "Especiales",
+    "Subsección": "",
     "Item": "Sangría 1L",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Especiales",
+    "Sección": "Especiales",
+    "Subsección": "",
     "Item": "Lemon Champ Jarra",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Fernet Media",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Gancia",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Gin Tonic",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Campari",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Ron",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Baileys",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Tragos",
+    "Sección": "Tragos",
+    "Subsección": "",
     "Item": "Limoncello",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Whisky",
+    "Sección": "Whisky",
+    "Subsección": "",
     "Item": "Blender",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Whisky",
+    "Sección": "Whisky",
+    "Subsección": "",
     "Item": "Johnnie Walker etiq. Roja",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Whisky",
+    "Sección": "Whisky",
+    "Subsección": "",
     "Item": "Johnnie Walker etiq. Negra",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
-    "Sección": "Con Alcohol",
-    "Subsección": "Whisky",
+    "Sección": "Whisky",
+    "Subsección": "",
     "Item": "Vat69",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Cabernet",
+    "Subsección": "",
+    "Item": "Alamos",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Cabernet",
+    "Subsección": "",
+    "Item": "Finca La Linda",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Cabernet",
+    "Subsección": "",
+    "Item": "Luigi Bosco",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Cabernet",
+    "Subsección": "",
+    "Item": "Nieto Senetiner",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Cabernet",
+    "Subsección": "",
+    "Item": "Emilia",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Cabernet",
+    "Subsección": "",
+    "Item": "Benjamin",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec",
+    "Subsección": "",
+    "Item": "Alamos",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec",
+    "Subsección": "",
+    "Item": "Finca La Linda",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec",
+    "Subsección": "",
+    "Item": "Luigi Bosco",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec",
+    "Subsección": "",
+    "Item": "Escorihuela",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec",
+    "Subsección": "",
+    "Item": "Nieto Senetiner",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec",
+    "Subsección": "",
+    "Item": "Emilia",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec 3/1",
+    "Subsección": "",
+    "Item": "Finca La Linda",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec 3/1",
+    "Subsección": "",
+    "Item": "Trumpeter",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec 3/1",
+    "Subsección": "",
+    "Item": "Saint Felicien",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec 3/1",
+    "Subsección": "",
+    "Item": "Emilia",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec 3/1",
+    "Subsección": "",
+    "Item": "Luigi Bosco",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Malbec 3/1",
+    "Subsección": "",
+    "Item": "Santa Julia",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Finca La Linda (Chardonnay)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Finca La Linda (Torrontés)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Latitud 33 (Chardonnay)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Fond de Cave (Chardonnay)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Benjamin (Chardonnay)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Indomita (Chardonnay)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Etchart Privado (Torrontés)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Blanco",
+    "Subsección": "",
+    "Item": "Fila Caruso (Torrontés)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Zamba Dulce",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Zamba Seco",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Navira Rosé",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Navira Blend",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Sta Julia Chenin Dulce Nat.",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Amabile (Frambua)",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Valentin Lacrado",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Otros Varietales",
+    "Subsección": "",
+    "Item": "Indomita",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Espumantes",
+    "Subsección": "",
+    "Item": "Nieto Senetiner Extra Brut",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Espumantes",
+    "Subsección": "",
+    "Item": "Nieto Brut Nature",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Espumantes",
+    "Subsección": "",
+    "Item": "Baron B. Extra Brut",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Espumantes",
+    "Subsección": "",
+    "Item": "Salentein Brut Rose",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Espumantes",
+    "Subsección": "",
+    "Item": "Salentein Extra Brut",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Espumantes",
+    "Subsección": "",
+    "Item": "Fila Caruso Extra Brut Rosé",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Copa",
+    "Subsección": "",
+    "Item": "Copa de vino Blanco / Tinto",
+    "nota": "",
+    "Precio": "\"10.000"
+  },
+  {
+    "Sección": "Menú Opcional",
+    "Subsección": "",
+    "Item": "Milanesa de ternera + fritas",
+    "nota": "",
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Menú Infantil",
     "Subsección": "",
     "Item": "Milanesa de ternera + fritas",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Menú Infantil",
     "Subsección": "",
     "Item": "Choripán + fritas",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Menú Infantil",
     "Subsección": "",
     "Item": "Bife a la parrilla + fritas",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Menú Infantil",
     "Subsección": "",
     "Item": "Cubierto mayores de 5 años",
     "nota": "",
-    "Precio": "$"
+    "Precio": "\"10.000"
   },
   {
     "Sección": "Menú Opcional",
     "Subsección": "",
     "Item": "P. Vegetariana",
-    "nota": "Cebolla, Tomate, Zucchini, Morrón Amarillo, Rojo y Verde, Berenjena, Champignon, Zanahoria, Anquito",
-    "Precio": "$"
+    "nota": "\"Cebolla",
+    "Precio": "Tomate"
   }
 ]
