@@ -1,94 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menú - El Faro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Menú - El Faro</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f8f8f8; color: #333; padding: 20px; line-height: 1.6; }
-    .menu-container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; }
-    header { background: #1a1a1a; color: #fff; padding: 20px; text-align: center; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-    .logo { font-size: 1.8rem; font-weight: bold; }
-    .icons { font-size: 1.5rem; }
-    section { padding: 20px; border-bottom: 1px solid #eee; }
-    section:last-child { border-bottom: none; }
-    h2 { color: #000; margin-bottom: 15px; font-size: 1.5rem; border-bottom: 2px solid #000; padding-bottom: 8px; text-transform: uppercase; }
-    .category h3 { color: #000; margin: 18px 0 12px; font-size: 1.3rem; text-transform: uppercase; }
-    .item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #ddd; }
-    .item-name { font-weight: 500; }
-    .item-price { color: #000; font-weight: bold; }
-    .special-note { font-style: italic; font-size: 0.9rem; color: #666; margin-top: 5px; padding-left: 10px; }
-    #parrilla { background-color: #1a1a1a; color: #fff; }
-    #parrilla h2 { color: #fff; border-bottom: 2px solid #fff; }
-    #parrilla .category h3, #parrilla .item-name, #parrilla .item-price { color: #fff; }
-    #parrilla .special-note { color: #ddd; }
-    footer { text-align: center; padding: 15px; background: #1a1a1a; color: #fff; font-size: 0.9rem; }
-    .admin-link { text-align: center; padding: 10px; background: #333; color: #fff; }
-    .admin-link a { color: #fff; text-decoration: none; font-weight: bold; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding: 20px; }
+    .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .login { text-align: center; margin-bottom: 30px; }
+    .login input { width: 250px; padding: 12px; margin: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; }
+    .login button { background: #1a1a1a; color: white; padding: 12px 24px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    .back-link { display: block; margin-top: 15px; color: #1a1a1a; text-decoration: none; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 12px; text-align: left; }
+    th { background: #1a1a1a; color: white; }
+    input, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    .readonly { background: transparent !important; border: none !important; color: #333; font-weight: 500; }
+    .precio { font-weight: bold; color: #d32f2f; }
+    .save-btn { background: #28a745; color: white; padding: 15px 30px; border: none; border-radius: 6px; font-size: 18px; cursor: pointer; margin: 20px 0; }
+    .csv-btn { background: #17a2b8; color: white; padding: 15px 30px; border: none; border-radius: 6px; font-size: 18px; cursor: pointer; margin: 10px; }
+    .status { margin: 15px 0; padding: 12px; border-radius: 6px; font-weight: bold; }
+    .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    #editor { display: none; }
+    .csv-upload { margin: 20px 0; padding: 15px; border: 2px dashed #ddd; border-radius: 6px; text-align: center; }
+    .csv-upload input { margin: 10px; }
   </style>
 </head>
 <body>
-  <div class="menu-container">
-    <header>
-      <div class="logo">EL FARO</div>
-      <div class="icons">Plato Vino</div>
-    </header>
+  <div class="container">
+    <h1>Editor de Menú - El Faro</h1>
 
-    <div id="menu-content">Cargando menú...</div>
-
-    <div class="admin-link">
-      <a href="/admin.html" target="_blank">Editar Precios (Solo autorizados)</a>
+    <div class="login">
+      <div><input type="text" id="user" placeholder="Usuario"></div>
+      <div><input type="password" id="pass" placeholder="Contraseña"></div>
+      <br>
+      <button onclick="login()">Iniciar Sesión</button>
+      <a href="/" class="back-link">Volver al Menú</a>
+      <div id="error-msg" class="status error" style="display:none; margin-top:15px;"></div>
     </div>
 
-    <footer>
-      <p>Pagos en efectivo y/o transferencia<br>Recibimos Tarj. de Débito y Crédito</p>
-    </footer>
+    <div id="editor">
+      <div id="status"></div>
+      
+      <!-- CSV SOLO PARA LALYM -->
+      <div id="csv-section" style="display:none;">
+        <div class="csv-upload">
+          <h3>Subir CSV del Google Sheet</h3>
+          <p>Descargá el CSV y súbelo aquí. Se genera el JSON automáticamente.</p>
+          <input type="file" id="csv-file" accept=".csv" />
+          <button class="csv-btn" onclick="uploadCSV()">Generar JSON desde CSV</button>
+        </div>
+      </div>
+
+      <table id="table">
+        <thead id="table-head"></thead>
+        <tbody></tbody>
+      </table>
+      <button class="save-btn" onclick="save()">Guardar Cambios</button>
+      <p style="text-align: center;"><a href="/" style="color: #1a1a1a; font-weight: bold;">Volver al Menú Público</a></p>
+    </div>
   </div>
 
   <script>
-    fetch('/menu.json')
-      .then(r => r.json())
-      .then(data => {
-        const content = document.getElementById('menu-content');
-        content.innerHTML = '';
-        let currentSection = '', currentSub = '';
+    const users = { faro: "Faro2025*", lalym: "Progreso2025*" };
+    let level = "";
+    let attempts = 0;
+    const maxAttempts = 5;
 
-        data.forEach(row => {
-          // Nueva sección
-          if (row.Sección && row.Sección !== currentSection) {
-            currentSection = row.Sección;
-            currentSub = '';
-            const sec = document.createElement('section');
-            if (row.Sección === 'Parrilla') sec.id = 'parrilla';
-            sec.innerHTML = `<h2>${row.Sección}</h2><div class="category"></div>`;
-            content.appendChild(sec);
-          }
+    function login() {
+      const u = document.getElementById('user').value.trim().toLowerCase();
+      const p = document.getElementById('pass').value;
+      const errorMsg = document.getElementById('error-msg');
 
-          // Subsección
-          if (row.Subsección && row.Subsección !== currentSub) {
-            currentSub = row.Subsección;
-            content.lastElementChild.querySelector('.category').innerHTML += `<h3>${row.Subsección}</h3>`;
-          }
+      if (users[u] === p) {
+        level = u === 'faro' ? 'precio' : 'todo';
+        document.querySelector('.login').style.display = 'none';
+        document.getElementById('editor').style.display = 'block';
+        if (level === 'todo') {
+          document.getElementById('csv-section').style.display = 'block';
+        }
+        showStatus(`Bienvenido, ${u === 'faro' ? 'Faro' : 'Lalym'}.`, 'success');
+        loadMenu();
+        attempts = 0;
+        errorMsg.style.display = 'none';
+      } else {
+        attempts++;
+        if (attempts >= maxAttempts) {
+          showStatus('Demasiados intentos. Redirigiendo al menú...', 'error');
+          setTimeout(() => location.href = '/', 2000);
+        } else {
+          errorMsg.textContent = `Contraseña incorrecta. Intento ${attempts} de ${maxAttempts}.`;
+          errorMsg.style.display = 'block';
+        }
+      }
+    }
 
-          // Item y precio
-          const cat = content.lastElementChild.querySelector('.category');
-          cat.innerHTML += `
-            <div class="item">
-              <span class="item-name">${row.Item}</span>
-              <span class="item-price">$ ${row.Precio}</span>
-            </div>
-          `;
+    function loadMenu() {
+      fetch('/menu.json')
+        .then(r => r.json())
+        .then(data => {
+          const thead = document.getElementById('table-head');
+          const tbody = document.querySelector('#table tbody');
+          thead.innerHTML = '';
+          tbody.innerHTML = '';
 
-          // Nota (ej: Fruta de estación + Vino blanco)
-          if (row.Nota) {
-            cat.innerHTML += `<div class="special-note">(${row.Nota})</div>`;
+          if (level === 'precio') {
+            // SOLO ITEM Y PRECIO
+            thead.innerHTML = `<tr><th>Item</th><th>Precio</th></tr>`;
+            data.forEach((row, i) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td><input type="text" value="${row.Item || ''}" class="readonly" readonly></td>
+                <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
+              `;
+              tbody.appendChild(tr);
+            });
+          } else {
+            // TODO COMPLETO
+            thead.innerHTML = `<tr><th>Sección</th><th>Subsección</th><th>Item</th><th>Nota</th><th>Precio</th></tr>`;
+            data.forEach((row, i) => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td><input type="text" value="${row.Sección || ''}" data-i="${i}" data-f="Sección"></td>
+                <td><input type="text" value="${row.Subsección || ''}" data-i="${i}" data-f="Subsección"></td>
+                <td><input type="text" value="${row.Item || ''}" data-i="${i}" data-f="Item"></td>
+                <td><textarea data-i="${i}" data-f="Nota">${row.Nota || ''}</textarea></td>
+                <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
+              `;
+              tbody.appendChild(tr);
+            });
           }
         });
-      })
-      .catch(() => {
-        document.getElementById('menu-content').innerHTML = '<p style="color:red">Error al cargar el menú.</p>';
+    }
+
+    function save() {
+      const inputs = document.querySelectorAll('#table input, #table textarea');
+      const data = {};
+      inputs.forEach(inp => {
+        if (!inp.readOnly) {
+          const i = inp.dataset.i, f = inp.dataset.f;
+          if (!data[i]) data[i] = {};
+          data[i][f] = inp.value;
+        }
       });
+      fetch('/.netlify/functions/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: Object.values(data), level })
+      })
+      .then(r => r.text())
+      .then(msg => {
+        showStatus(msg.includes('exito') ? 'Guardado!' : msg, msg.includes('exito') ? 'success' : 'error');
+        if (msg.includes('exito')) setTimeout(() => location.reload(), 1500);
+      });
+    }
+
+    function uploadCSV() {
+      const fileInput = document.getElementById('csv-file');
+      const file = fileInput.files[0];
+      if (!file) return showStatus('Selecciona un CSV', 'error');
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const csv = e.target.result;
+        const data = parseCSV(csv);
+        if (data.length === 0) return showStatus('CSV vacío o inválido', 'error');
+
+        fetch('/.netlify/functions/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data, level: 'todo' })
+        })
+        .then(r => r.text())
+        .then(msg => {
+          showStatus(msg.includes('exito') ? 'JSON generado! Actualizando tabla...' : msg, msg.includes('exito') ? 'success' : 'error');
+          if (msg.includes('exito')) {
+            setTimeout(() => loadMenu(), 2000); // RECARGA TABLA
+          }
+        });
+      };
+      reader.readAsText(file);
+    }
+
+    function parseCSV(csv) {
+      const lines = csv.split(/\r?\n/);
+      if (lines.length < 2) return [];
+      const headers = parseCSVLine(lines[0]);
+      const data = [];
+      for (let i = 1; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        const values = parseCSVLine(line);
+        if (values.length < headers.length) continue;
+        const row = {};
+        headers.forEach((h, j) => {
+          let val = values[j] || '';
+          if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+          row[h.trim()] = val;
+        });
+        const map = { 'Sección': 'Sección', 'Subsección': 'Subsección', 'Item': 'Item', 'nota': 'Nota', 'Precio': 'Precio' };
+        const normalized = {};
+        Object.keys(row).forEach(k => { normalized[map[k] || k] = row[k]; });
+        if (normalized.Item) data.push(normalized);
+      }
+      return data;
+    }
+
+    function parseCSVLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"') {
+          if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+          else { inQuotes = !inQuotes; }
+        } else if (char === ',' && !inQuotes) {
+          result.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      result.push(current);
+      return result;
+    }
+
+    function showStatus(msg, type) {
+      const s = document.getElementById('status');
+      s.textContent = msg;
+      s.className = 'status ' + type;
+    }
   </script>
 </body>
 </html>
