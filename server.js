@@ -3,9 +3,10 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.PORT || 10000;  // Render obliga puerto 10000
+const PORT = process.env.PORT;  // ¡SOLO ESTO! Render asigna el puerto
 
-app.use(express.static(path.join(__dirname, '.')));
+// Servir archivos estáticos
+app.use(express.static(__dirname));
 
 // Inyectar token en admin.html
 app.get('/admin.html', (req, res) => {
@@ -24,9 +25,7 @@ app.get('*', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server on port ${PORT}`);
-});
+// ESCUCHAR EN EL PUERTO QUE RENDER ASIGNA
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
