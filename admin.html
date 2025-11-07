@@ -35,7 +35,7 @@
       <div><input type="text" id="user" placeholder="Usuario"></div>
       <div><input type="password" id="pass" placeholder="Contraseña"></div>
       <br>
-      <button onclick="login()">Iniciar Sesión</button>
+      <button id="login-btn">Iniciar Sesión</button>
       <a href="/" class="back-link">Volver al Menú</a>
       <div id="error-msg" class="status error" style="display:none; margin-top:15px;"></div>
     </div>
@@ -48,7 +48,7 @@
           <h3>Subir CSV del Google Sheet</h3>
           <p>Descargá el CSV y súbelo aquí. Se genera el JSON automáticamente.</p>
           <input type="file" id="csv-file" accept=".csv" />
-          <button class="csv-btn" onclick="uploadCSV()">Generar JSON desde CSV</button>
+          <button class="csv-btn" id="upload-btn">Generar JSON desde CSV</button>
         </div>
       </div>
 
@@ -56,19 +56,12 @@
         <thead id="table-head"></thead>
         <tbody></tbody>
       </table>
-      <button class="save-btn" onclick="save()">Guardar Cambios</button>
+      <button class="save-btn" id="save-btn">Guardar Cambios</button>
       <p style="text-align: center;"><a href="/" style="color: #1a1a1a; font-weight: bold;">Volver al Menú Público</a></p>
     </div>
   </div>
 
-  <!-- === CARGAR GITHUB_TOKEN DESDE RENDER === -->
   <script>
-    // Render inyecta variables como window.GITHUB_TOKEN
-   const GITHUB_TOKEN = "{{GITHUB_TOKEN}}";
-  if (!GITHUB_TOKEN || GITHUB_TOKEN === "{{GITHUB_TOKEN}}") {
-    showStatus('Error: GITHUB_TOKEN no configurado en Render', 'error');
-    return;
-  }
     // === CREDENCIALES OCULTAS (HASH) ===
     const hash = (str) => {
       let h = 0;
@@ -86,7 +79,20 @@
     const REPO = "kpcarla01/elfaro-menu";
     const PATH = "menu.json";
 
-    function login() {
+    // === TOKEN EN localStorage (solo para admin) ===
+    let GITHUB_TOKEN = localStorage.getItem('elfaro_github_token');
+    if (!GITHUB_TOKEN) {
+      GITHUB_TOKEN = prompt("Token de GitHub (solo para admin):");
+      if (GITHUB_TOKEN && GITHUB_TOKEN.startsWith('ghp_')) {
+        localStorage.setItem('elfaro_github_token', GITHUB_TOKEN);
+      } else {
+        alert("Token inválido");
+        location.href = '/';
+      }
+    }
+
+    // === LOGIN CON EVENT LISTENER (FUNCIONA SIEMPRE) ===
+    document.getElementById('login-btn').addEventListener('click', () => {
       const user = document.getElementById('user').value.trim().toLowerCase();
       const pass = document.getElementById('pass').value;
       const errorMsg = document.getElementById('error-msg');
@@ -110,7 +116,11 @@
           errorMsg.style.display = 'block';
         }
       }
-    }
+    });
+
+    // === GUARDAR Y CSV CON EVENT LISTENERS ===
+    document.getElementById('save-btn').addEventListener('click', save);
+    document.getElementById('upload-btn').addEventListener('click', uploadCSV);
 
     async function loadMenu() {
       try {
@@ -163,7 +173,7 @@
 
       try {
         const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-          headers: { Authorization: ` ${GITHUB_}`, 'User-Agent': 'elfaro' }
+          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'User-Agent': 'elfaro' }
         });
         const file = await res.json();
         let current = file.content ? JSON.parse(atob(file.content)) : [];
@@ -180,7 +190,7 @@
         const content = btoa(unescape(encodeURIComponent(JSON.stringify(current, null, 2))));
         const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
           method: 'PUT',
-          headers: { Authorization: ` ${GITHUB_}`, 'Content-Type': 'application/json' },
+          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: 'Actualizar menú', content, sha: file.sha })
         });
 
@@ -207,13 +217,13 @@
 
         try {
           const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-            headers: { Authorization: ` ${GITHUB_}` }
+            headers: { Authorization: `token ${GITHUB_TOKEN}` }
           });
           const file = await res.json();
           const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
           const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
             method: 'PUT',
-            headers: { Authorization: ` ${GITHUB_}`, 'Content-Type': 'application/json' },
+            headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: 'CSV → JSON', content, sha: file.sha })
           });
 
@@ -239,7 +249,7 @@
         const row = {};
         headers.forEach((h, j) => {
           let val = values[j] || '';
-          if (val.startsWith('"') && val.endsWith('"')) valLess = val.slice(1, -1);
+          if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
           row[h] = val;
         });
         const map = { 'Sección': 'Sección', 'Subsección': 'Subsección', 'Item': 'Item', 'nota': 'Nota', 'Precio': 'Precio' };
@@ -276,11 +286,5 @@
       s.className = 'status ' + type;
     }
   </script>
-
-  <!-- === RENDER INYECTA EL TOKEN AQUÍ === -->
-  <script>
-    window.GITHUB_TOKEN = "{{GITHUB_TOKEN}}";
-  </script>
 </body>
 </html>
-
