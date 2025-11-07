@@ -62,12 +62,8 @@
   </div>
 
   <script>
-    // === TOKEN INYECTADO POR RENDER (Web Service) ===
-    const GITHUB_TOKEN = "{{GITHUB_TOKEN}}";
-    if (!GITHUB_TOKEN || GITHUB_TOKEN === "{{GITHUB_TOKEN}}") {
-      document.body.innerHTML = '<h2 style="color:red; text-align:center;">Error: Token no configurado en Render</h2>';
-      throw new Error("Falta GITHUB_TOKEN");
-    }
+    // === NO SE NECESITA TOKEN AQUÍ ===
+    // El token ahora vive de forma segura en el servidor.
 
     // === CREDENCIALES OCULTAS (HASH) ===
     const hash = (str) => {
@@ -83,8 +79,6 @@
     let level = "";
     let attempts = 0;
     const maxAttempts = 5;
-    const REPO = "kpcarla01/elfaro-menu";
-    const PATH = "menu.json";
 
     // === EVENT LISTENERS ===
     document.getElementById('login-btn').addEventListener('click', login);
@@ -119,7 +113,8 @@
 
     async function loadMenu() {
       try {
-        const res = await fetch('/menu.json?' + Date.now());
+        // Usamos Date.now() para evitar el caché
+        const res = await fetch('/menu.json?' + Date.now()); 
         const data = await res.json();
         const thead = document.getElementById('table-head');
         const tbody = document.querySelector('#table tbody');
@@ -131,7 +126,7 @@
           data.forEach((row, i) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-              <td><input type="text" value="${row.Item || ''}" class="readonly" readonly></td>
+              <td><input type="text" value="${row.Item || ''}" class="readonly" readonly data-f="Item"></td>
               <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
             `;
             tbody.appendChild(tr);
@@ -156,48 +151,44 @@
     }
 
     async function save() {
-      const inputs = document.querySelectorAll('#table input, #table textarea');
-      const changes = {};
-      inputs.forEach(inp => {
-        if (!inp.readOnly) {
-          const i = inp.dataset.i, f = inp.dataset.f;
-          if (!changes[i]) changes[i] = {};
-          changes[i][f] = inp.value;
+      // 1. Construir el array de datos completo desde la tabla
+      const dataFromTable = [];
+      const rows = document.querySelectorAll('#table tbody tr');
+      
+      rows.forEach(tr => {
+        const row = {};
+        // Recoger todos los campos de esta fila
+        tr.querySelectorAll('input[data-f], textarea[data-f]').forEach(inp => {
+          row[inp.dataset.f] = inp.value;
+        });
+        
+        // Caso especial 'precio': el campo 'Item' es readonly, lo añadimos
+        if (level === 'precio' && !row['Item']) {
+          const itemInput = tr.querySelector('input.readonly');
+          if (itemInput) row['Item'] = itemInput.value;
+        }
+        
+        if (Object.keys(row).length > 0) {
+            dataFromTable.push(row);
         }
       });
 
+      // 2. Enviar al backend (a nuestro server.js)
       try {
-        const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'User-Agent': 'elfaro' }
+        const response = await fetch('/api/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: dataFromTable, level: level })
         });
-        const file = await res.json();
-        let current = file.content ? JSON.parse(atob(file.content)) : [];
+        
+        const body = await response.text();
+        if (!response.ok) throw new Error(body);
+        
+        showStatus('Guardado con éxito!', 'success');
+        setTimeout(() => location.reload(), 1500);
 
-        Object.entries(changes).forEach(([i, row]) => {
-          if (level === 'precio') {
-            if (current[i]) current[i].Precio = row.Precio;
-          } else {
-            if (!current[i]) current[i] = {};
-            Object.assign(current[i], row);
-          }
-        });
-
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(current, null, 2))));
-        const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-          method: 'PUT',
-          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: 'Actualizar menú', content, sha: file.sha })
-        });
-
-        if (response.ok) {
-          showStatus('Guardado con éxito!', 'success');
-          setTimeout(() => location.reload(), 1500);
-        } else {
-          const err = await response.json();
-          showStatus('Error: ' + err.message, 'error');
-        }
       } catch (e) {
-        showStatus('Error de conexión', 'error');
+        showStatus(`Error al guardar: ${e.message}`, 'error');
       }
     }
 
@@ -210,24 +201,25 @@
         const data = parseCSV(csv);
         if (data.length === 0) return showStatus('CSV vacío', 'error');
 
+        // Enviar datos parseados a nuestro backend
         try {
-          const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-            headers: { Authorization: `token ${GITHUB_TOKEN}` }
-          });
-          const file = await res.json();
-          const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-          const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-            method: 'PUT',
-            headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: 'CSV → JSON', content, sha: file.sha })
+          const response = await fetch('/api/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              data: data, // El JSON parseado del CSV
+              level: 'todo' // Subir un CSV siempre reemplaza todo
+            })
           });
 
-          if (response.ok) {
-            showStatus('JSON generado y guardado!', 'success');
-            setTimeout(() => loadMenu(), 2000);
-          }
+          const body = await response.text();
+          if (!response.ok) throw new Error(body);
+
+          showStatus('JSON generado y guardado!', 'success');
+          setTimeout(() => loadMenu(), 2000); // Recargar el menú en la tabla
+
         } catch (e) {
-          showStatus('Error al subir CSV', 'error');
+          showStatus(`Error al subir CSV: ${e.message}`, 'error');
         }
       };
       reader.readAsText(file);
