@@ -64,12 +64,11 @@
   <!-- === CARGAR GITHUB_TOKEN DESDE RENDER === -->
   <script>
     // Render inyecta variables como window.GITHUB_TOKEN
-    const GITHUB_TOKEN = window.GITHUB_TOKEN;
-    if (!GITHUB_TOKEN) {
-      document.body.innerHTML = '<h2 style="color:red; text-align:center;">Error: GITHUB_TOKEN no configurado en Render</h2>';
-      throw new Error("Falta GITHUB_TOKEN");
-    }
-
+   const GITHUB_TOKEN = "{{GITHUB_TOKEN}}";
+  if (!GITHUB_TOKEN || GITHUB_TOKEN === "{{GITHUB_TOKEN}}") {
+    showStatus('Error: GITHUB_TOKEN no configurado en Render', 'error');
+    return;
+  }
     // === CREDENCIALES OCULTAS (HASH) ===
     const hash = (str) => {
       let h = 0;
@@ -164,7 +163,7 @@
 
       try {
         const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'User-Agent': 'elfaro' }
+          headers: { Authorization: ` ${GITHUB_}`, 'User-Agent': 'elfaro' }
         });
         const file = await res.json();
         let current = file.content ? JSON.parse(atob(file.content)) : [];
@@ -181,7 +180,7 @@
         const content = btoa(unescape(encodeURIComponent(JSON.stringify(current, null, 2))));
         const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
           method: 'PUT',
-          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+          headers: { Authorization: ` ${GITHUB_}`, 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: 'Actualizar menú', content, sha: file.sha })
         });
 
@@ -208,13 +207,13 @@
 
         try {
           const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-            headers: { Authorization: `token ${GITHUB_TOKEN}` }
+            headers: { Authorization: ` ${GITHUB_}` }
           });
           const file = await res.json();
           const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
           const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
             method: 'PUT',
-            headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+            headers: { Authorization: ` ${GITHUB_}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: 'CSV → JSON', content, sha: file.sha })
           });
 
@@ -284,3 +283,4 @@
   </script>
 </body>
 </html>
+
