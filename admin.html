@@ -64,7 +64,7 @@
         level = u === 'faro' ? 'precio' : 'todo';
         document.querySelector('.login').style.display = 'none';
         document.getElementById('editor').style.display = 'block';
-        showStatus(`Bienvenido, ${u}. Solo puedes editar precios.`, 'success');
+        showStatus(`Bienvenido, ${u === 'faro' ? 'Faro' : 'Lalym'}.`, 'success');
         loadMenu();
       } else showStatus('Usuario o contraseña incorrectos', 'error');
     }
@@ -81,4 +81,40 @@
             tr.innerHTML = `
               <td><input type="text" value="${row.Sección || ''}" data-i="${i}" data-f="Sección" ${ro}></td>
               <td><input type="text" value="${row.Subsección || ''}" data-i="${i}" data-f="Subsección" ${ro}></td>
-              <td><input type="text" value="${row.Item || ''}" data-i="${i}" data-f="Item" ${
+              <td><input type="text" value="${row.Item || ''}" data-i="${i}" data-f="Item" ${ro}></td>
+              <td><textarea data-i="${i}" data-f="Nota" ${ro}>${row.Nota || ''}</textarea></td>
+              <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        });
+    }
+
+    function save() {
+      const inputs = document.querySelectorAll('#table input, #table textarea');
+      const data = {};
+      inputs.forEach(inp => {
+        const i = inp.dataset.i, f = inp.dataset.f;
+        if (!data[i]) data[i] = {};
+        data[i][f] = inp.value;
+      });
+      fetch('/.netlify/functions/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: Object.values(data), level })
+      })
+      .then(r => r.text())
+      .then(msg => {
+        showStatus(msg.includes('exito') ? 'Guardado!' : msg, msg.includes('exito') ? 'success' : 'error');
+        if (msg.includes('exito')) setTimeout(() => location.reload(), 1500);
+      });
+    }
+
+    function showStatus(msg, type) {
+      const s = document.getElementById('status');
+      s.textContent = msg;
+      s.className = 'status ' + type;
+    }
+  </script>
+</body>
+</html>
