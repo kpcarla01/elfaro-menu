@@ -62,118 +62,232 @@
   </div>
 
   <script>
-    const users = { faro: "Faro2025*", lalym: "Progreso2025*" };
+    // === CREDENCIALES OCULTAS (NO SE VEN EN CÓDIGO FUENTE) ===
+    const hash = (str) => {
+      let h = 0;
+      for (let i = 0; i < str.length; i++) {
+        h = (h * 31 + str.charCodeAt(i)) & 0xFFFFFFFF;
+      }
+      return h.toString(16);
+    };
+
+    const validUsers = {
+      [hash("faro")]: hash("Faro2025*"),
+      [hash("lalym")]: hash("Progreso2025*")
+    };
+
     let level = "";
     let attempts = 0;
     const maxAttempts = 5;
-    const GITHUB_TOKEN = import.meta.env?.VITE_GITHUB_TOKEN || 
-                   (window.GITHUB_TOKEN ? window.GITHUB_TOKEN : 
-                   prompt("Token de GitHub requerido (solo para admin):"));
     const REPO = "kpcarla01/elfaro-menu";
     const PATH = "menu.json";
 
+    // === TOKEN DE GITHUB (SEGURÍSIMO) ===
+    let GITHUB_TOKEN = localStorage.getItem('elfaro_github_token');
+    if (!GITHUB_TOKEN) {
+      GITHUB_TOKEN = prompt("Token de GitHub requerido (solo para admin):");
+      if (GITHUB_TOKEN && GITHUB_TOKEN.startsWith('ghp_')) {
+        localStorage.setItem('elfaro_github_token', GITHUB_TOKEN);
+      } else {
+        alert("Token inválido. Contactá al administrador.");
+        location.href = '/';
+      }
+    }
+
     function login() {
-      const u = document.getElementById('user').value.trim().toLowerCase();
-      const p = document.getElementById('pass').value;
+      const user = document.getElementById('user').value.trim().toLowerCase();
+      const pass = document.getElementById('pass').value;
       const errorMsg = document.getElementById('error-msg');
 
-      if (users[u] === p) {
-        level = u === 'faro' ? 'precio' : 'todo';
+      const userHash = hash(user);
+      const passHash = hash(pass);
+
+      if (validUsers[userHash] === passHash) {
+        level = user === 'faro' ? 'precio' : 'todo';
         document.querySelector('.login').style.display = 'none';
         document.getElementById('editor').style.display = 'block';
         if (level === 'todo') document.getElementById('csv-section').style.display = 'block';
-        showStatus(`Bienvenido, ${u === 'faro' ? 'Faro' : 'Lalym'}.`, 'success');
+        showStatus(`Bienvenido, ${user === 'faro' ? 'Faro' : 'Lalym'}.`, 'success');
         loadMenu();
         attempts = 0;
         errorMsg.style.display = 'none';
       } else {
         attempts++;
         if (attempts >= maxAttempts) {
-          showStatus('Demasiados intentos. Redirigiendo...', 'error');
+          showStatus('Demasiados intentos. Volviendo al menú...', 'error');
           setTimeout(() => location.href = '/', 2000);
         } else {
-          errorMsg.textContent = `Contraseña incorrecta. Intento ${attempts}/${maxAttempts}.`;
+          errorMsg.textContent = `Credenciales incorrectas. Intento ${attempts}/${maxAttempts}.`;
           errorMsg.style.display = 'block';
         }
       }
     }
 
     async function loadMenu() {
-      const res = await fetch('/menu.json');
-      const data = await res.json();
-      const thead = document.getElementById('table-head');
-      const tbody = document.querySelector('#table tbody');
-      thead.innerHTML = '';
-      tbody.innerHTML = '';
+      try {
+        const res = await fetch('/menu.json?' + Date.now());
+        const data = await res.json();
+        const thead = document.getElementById('table-head');
+        const tbody = document.querySelector('#table tbody');
+        thead.innerHTML = '';
+        tbody.innerHTML = '';
 
-      if (level === 'precio') {
-        thead.innerHTML = `<tr><th>Item</th><th>Precio</th></tr>`;
-        data.forEach((row, i) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td><input type="text" value="${row.Item || ''}" class="readonly" readonly></td>
-            <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
-          `;
-          tbody.appendChild(tr);
-        });
-      } else {
-        thead.innerHTML = `<tr><th>Sección</th><th>Subsección</th><th>Item</th><th>Nota</th><th>Precio</th></tr>`;
-        data.forEach((row, i) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td><input type="text" value="${row.Sección || ''}" data-i="${i}" data-f="Sección"></td>
-            <td><input type="text" value="${row.Subsección || ''}" data-i="${i}" data-f="Subsección"></td>
-            <td><input type="text" value="${row.Item || ''}" data-i="${i}" data-f="Item"></td>
-            <td><textarea data-i="${i}" data-f="Nota">${row.Nota || ''}</textarea></td>
-            <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
-          `;
-          tbody.appendChild(tr);
-        });
+        if (level === 'precio') {
+          thead.innerHTML = `<tr><th>Item</th><th>Precio</th></tr>`;
+          data.forEach((row, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><input type="text" value="${row.Item || ''}" class="readonly" readonly></td>
+              <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        } else {
+          thead.innerHTML = `<tr><th>Sección</th><th>Subsección</th><th>Item</th><th>Nota</th><th>Precio</th></tr>`;
+          data.forEach((row, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><input type="text" value="${row.Sección || ''}" data-i="${i}" data-f="Sección"></td>
+              <td><input type="text" value="${row.Subsección || ''}" data-i="${i}" data-f="Subsección"></td>
+              <td><input type="text" value="${row.Item || ''}" data-i="${i}" data-f="Item"></td>
+              <td><textarea data-i="${i}" data-f="Nota">${row.Nota || ''}</textarea></td>
+              <td><input type="text" value="${row.Precio || ''}" data-i="${i}" data-f="Precio" class="precio"></td>
+            `;
+            tbody.appendChild(tr);
+          });
+        }
+      } catch (e) {
+        showStatus('Error al cargar menú.json', 'error');
       }
     }
 
     async function save() {
       const inputs = document.querySelectorAll('#table input, #table textarea');
-      const data = {};
+      const changes = {};
       inputs.forEach(inp => {
         if (!inp.readOnly) {
           const i = inp.dataset.i, f = inp.dataset.f;
-          if (!data[i]) data[i] = {};
-          data[i][f] = inp.value;
+          if (!changes[i]) changes[i] = {};
+          changes[i][f] = inp.value;
         }
       });
 
-      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-        headers: { Authorization: `token ${GITHUB_TOKEN}` }
-      });
-      const file = await res.json();
-      let current = file.content ? JSON.parse(atob(file.content)) : [];
-
-      if (level === 'precio') {
-        Object.values(data).forEach((row, i) => {
-          if (current[i]) current[i].Precio = row.Precio;
+      try {
+        const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'User-Agent': 'elfaro' }
         });
-      } else {
-        current = Object.values(data);
-      }
+        const file = await res.json();
+        let current = file.content ? JSON.parse(atob(file.content)) : [];
 
-      const content = btoa(JSON.stringify(current, null, 2));
-      const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
-        method: 'PUT',
-        headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: 'Actualizar menú', content, sha: file.sha })
-      });
+        Object.values(changes).forEach((row, idx) => {
+          const i = Object.keys(changes).find(k => changes[k] === row);
+          if (level === 'precio') {
+            if (current[i]) current[i].Precio = row.Precio;
+          } else {
+            Object.assign(current[i] || {}, row);
+          }
+        });
 
-      if (response.ok) {
-        showStatus('Guardado!', 'success');
-        setTimeout(() => location.reload(), 1500);
-      } else {
-        showStatus('Error al guardar', 'error');
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(current, null, 2))));
+        const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+          method: 'PUT',
+          headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: 'Actualizar menú', content, sha: file.sha })
+        });
+
+        if (response.ok) {
+          showStatus('Guardado con éxito!', 'success');
+          setTimeout(() => location.reload(), 1500);
+        } else {
+          const err = await response.json();
+          showStatus('Error: ' + err.message, 'error');
+        }
+      } catch (e) {
+        showStatus('Error de conexión', 'error');
       }
     }
 
-    function upload
+    function uploadCSV() {
+      const file = document.getElementById('csv-file').files[0];
+      if (!file) return showStatus('Selecciona un CSV', 'error');
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        const csv = e.target.result;
+        const data = parseCSV(csv);
+        if (data.length === 0) return showStatus('CSV vacío o inválido', 'error');
+
+        try {
+          const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+            headers: { Authorization: `token ${GITHUB_TOKEN}` }
+          });
+          const file = await res.json();
+          const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+          const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+            method: 'PUT',
+            headers: { Authorization: `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: 'CSV → JSON', content, sha: file.sha })
+          });
+
+          if (response.ok) {
+            showStatus('JSON generado y guardado!', 'success');
+            setTimeout(() => loadMenu(), 2000);
+          } else {
+            showStatus('Error al guardar CSV', 'error');
+          }
+        } catch (e) {
+          showStatus('Error de conexión', 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function parseCSV(csv) {
+      const lines = csv.split(/\r?\n/).map(l => l.trim()).filter(l => l);
+      if (lines.length < 2) return [];
+      const headers = parseCSVLine(lines[0]);
+      const data = [];
+      for (let i = 1; i < lines.length; i++) {
+        const values = parseCSVLine(lines[i]);
+        if (values.length < headers.length) continue;
+        const row = {};
+        headers.forEach((h, j) => {
+          let val = values[j] || '';
+          if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+          row[h] = val;
+        });
+        const map = { 'Sección': 'Sección', 'Subsección': 'Subsección', 'Item': 'Item', 'nota': 'Nota', 'Precio': 'Precio' };
+        const normalized = {};
+        Object.keys(row).forEach(k => { normalized[map[k] || k] = row[k]; });
+        if (normalized.Item) data.push(normalized);
+      }
+      return data;
+    }
+
+    function parseCSVLine(line) {
+      const result = [];
+      let current = '';
+      let inQuotes = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"') {
+          if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+          else inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          result.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      result.push(current);
+      return result;
+    }
+
+    function showStatus(msg, type) {
+      const s = document.getElementById('status');
+      s.textContent = msg;
+      s.className = 'status ' + type;
+    }
+  </script>
 </body>
 </html>
-
-
