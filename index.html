@@ -66,11 +66,12 @@
             content.lastElementChild.querySelector('.category').innerHTML += `<h3>${row.Subsección}</h3>`;
           }
           const cat = content.lastElementChild.querySelector('.category');
-          cat.innerHTML += `<div class="item"><span class="item-name">${row.Item}</span><span class="item-price">$${row.Precio}</span></div>`;
+          cat.innerHTML += `<div class="item"><span class="item-name">${row.Item}</span><span class="item-price">$ ${row.Precio}</span></div>`;
           if (row.Nota) cat.innerHTML += `<div class="special-note">${row.Nota}</div>`;
         });
       })
       .catch(() => content.innerHTML = '<p style="color:red">Error al cargar el menú.</p>');
   </script>
 </body>
+
 </html>
