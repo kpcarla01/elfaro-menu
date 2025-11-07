@@ -43,7 +43,6 @@
     <div id="editor">
       <div id="status"></div>
       
-      <!-- CSV SOLO PARA LALYM -->
       <div id="csv-section" style="display:none;">
         <div class="csv-upload">
           <h3>Subir CSV del Google Sheet</h3>
@@ -106,7 +105,6 @@
           tbody.innerHTML = '';
 
           if (level === 'precio') {
-            // SOLO ITEM Y PRECIO
             thead.innerHTML = `<tr><th>Item</th><th>Precio</th></tr>`;
             data.forEach((row, i) => {
               const tr = document.createElement('tr');
@@ -117,7 +115,6 @@
               tbody.appendChild(tr);
             });
           } else {
-            // TODO COMPLETO
             thead.innerHTML = `<tr><th>Sección</th><th>Subsección</th><th>Item</th><th>Nota</th><th>Precio</th></tr>`;
             data.forEach((row, i) => {
               const tr = document.createElement('tr');
@@ -176,7 +173,7 @@
         .then(msg => {
           showStatus(msg.includes('exito') ? 'JSON generado! Actualizando tabla...' : msg, msg.includes('exito') ? 'success' : 'error');
           if (msg.includes('exito')) {
-            setTimeout(() => loadMenu(), 2000); // RECARGA TABLA
+            setTimeout(() => loadMenu(), 2000);
           }
         });
       };
