@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menú - El Faro</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f8f8f8; color: #333; padding: 20px; line-height: 1.6; }
+    .menu-container { max-width: 800px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; }
+    header { background: #1a1a1a; color: #fff; padding: 20px; text-align: center; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .logo { font-size: 1.8rem; font-weight: bold; }
+    .icons { font-size: 1.5rem; }
+    section { padding: 20px; border-bottom: 1px solid #eee; }
+    section:last-child { border-bottom: none; }
+    h2 { color: #000; margin-bottom: 15px; font-size: 1.5rem; border-bottom: 2px solid #000; padding-bottom: 8px; text-transform: uppercase; }
+    .category h3 { color: #000; margin: 18px 0 12px; font-size: 1.3rem; text-transform: uppercase; }
+    .item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #ddd; }
+    .item-name { font-weight: 500; }
+    .item-price { color: #000; font-weight: bold; }
+    .special-note { font-style: italic; font-size: 0.9rem; color: #666; margin-top: 5px; padding-left: 10px; }
+    #parrilla { background-color: #1a1a1a; color: #fff; }
+    #parrilla h2, #parrilla .category h3, #parrilla .item-name, #parrilla .item-price { color: #fff; }
+    #parrilla .special-note { color: #ddd; }
+    footer { text-align: center; padding: 15px; background: #1a1a1a; color: #fff; font-size: 0.9rem; }
+    .admin-link { text-align: center; padding: 10px; background: #333; color: #fff; }
+    .admin-link a { color: #fff; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <header>
+      <div class="logo">EL FARO</div>
+      <div class="icons">Plato Vino</div>
+    </header>
+
+    <div id="menu-content">Cargando menú...</div>
+
+    <div class="admin-link">
+      <a href="/admin.html" target="_blank">Editar Precios (Admin)</a>
+    </div>
+
+    <footer>
+      <p>Pagos en efectivo y/o transferencia<br>Recibimos Tarj. de Débito y Crédito</p>
+    </footer>
+  </div>
+
+  <script>
+    fetch('/menu.json')
+      .then(r => r.json())
+      .then(data => {
+        const content = document.getElementById('menu-content');
+        content.innerHTML = '';
+        let currentSection = '', currentSub = '';
+
+        data.forEach(row => {
+          if (row.Sección && row.Sección !== currentSection) {
+            currentSection = row.Sección; currentSub = '';
+            const sec = document.createElement('section');
+            if (row.Sección === 'Parrilla') sec.id = 'parrilla';
+            sec.innerHTML = `<h2>${row.Sección}</h2><div class="category"></div>`;
+            content.appendChild(sec);
+          }
+          if (row.Subsección && row.Subsección !== currentSub) {
+            currentSub = row.Subsección;
+            content.lastElementChild.querySelector('.category').innerHTML += `<h3>${row.Subsección}</h3>`;
+          }
+          const cat = content.lastElementChild.querySelector('.category');
+          cat.innerHTML += `<div class="item"><span class="item-name">${row.Item}</span><span class="item-price">$${row.Precio}</span></div>`;
+          if (row.Nota) cat.innerHTML += `<div class="special-note">${row.Nota}</div>`;
+        });
+      })
+      .catch(() => content.innerHTML = '<p style="color:red">Error al cargar el menú.</p>');
+  </script>
+</body>
+</html>

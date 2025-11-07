@@ -1,0 +1,597 @@
+[
+  {
+    "Sección": "Entradas",
+    "Subsección": "",
+    "Item": "Empanada Dulce / Salada",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Entradas",
+    "Subsección": "",
+    "Item": "Provoleta",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Entradas",
+    "Subsección": "",
+    "Item": "Tabla de salame y queso",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "",
+    "Item": "Papas fritas",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "",
+    "Item": "Papas fritas con huevo",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "",
+    "Item": "Purè de papa",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "",
+    "Item": "Purè de Zapallo",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "",
+    "Item": "Purè Mixto",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "Ensaladas",
+    "Item": "• Rúcula y Queso",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "Ensaladas",
+    "Item": "• Zanahoria y Huevo",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "Ensaladas",
+    "Item": "• Mixta",
+    "nota": "Lechuga, Tomate, Cebolla",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "Ensaladas",
+    "Item": "• Completa",
+    "nota": "Repollo Blanco y Morado, Cebolla, Tomate, Pimiento, Lechuga, Rúcula, Achicoria, Rabanito, Pepino, Huevo duro",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Guarniciones",
+    "Subsección": "Ensaladas",
+    "Item": "• César",
+    "nota": "Lechuga, Queso en hebras, Croutons, Cherry, Salsa Worcestershire, Pollo",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Completa",
+    "Item": "Completa. Por persona",
+    "nota": "Entrada de 1 empanada (dulce o salada) + 12 cortes + Cabrito + Guarniciones libres a elección.",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Compartida",
+    "Item": "Compartida. Para 2 personas",
+    "nota": "8 cortes (Bife de cuadril, Carne de Cerdo, Chorizo, Morcilla, Chinchulín, Riñón, Tira y Costilla de Cerdo) + 2 Guarniciones libre a elección.",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Especial",
+    "Item": "Especial",
+    "nota": "5 cortes (Bife, Tira, Chorizo, Morcilla y Matambre)",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Ejecutiva",
+    "Item": "Ejecutiva",
+    "nota": "4 cortes a elección. Cabrito, Molleja, Matambre (Bife de cuadril, Carne de Cerdo, Chorizo, Morcilla, Chinchulín, Riñón, Tira y Costilla de cerdo)",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Ejecutiva",
+    "Item": "Cubierto por persona (si se comparte el plato)",
+    "nota": "No incluye: guarnición.",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Cuadril",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Achuras",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Bife de Chorizo",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Matambre",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Cerdo",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Tira",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Entraña",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Pollo",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Parrilla",
+    "Subsección": "Cortes sin Guarnición",
+    "Item": "Cabrito",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Pastas",
+    "Subsección": "",
+    "Item": "Ñoquis",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Pastas",
+    "Subsección": "",
+    "Item": "Tallarin",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Pastas",
+    "Subsección": "",
+    "Item": "Sorrentinos",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Pastas",
+    "Subsección": "",
+    "Item": "Salsas: Boloñesa / Roja / Mixta / Crema",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Frutillas con crema",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Flan casero",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Budín de Pan",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Ensalada de Fruta",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Queso y Dulce",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Tiramisú",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Brownie con Helado",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Peras al Malbec",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Frutas en Almíbar",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "Adicional de Crema",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "",
+    "Item": "o Dulce de Leche",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "Helados",
+    "Item": "Helado con Baileys",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "Helados",
+    "Item": "Helado en copa",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "Helados",
+    "Item": "Vainilla, Frutilla, Limón, Chocolate, Americana, Dulce de Leche",
+    "nota": "",
+    "Precio": ""
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "Helados",
+    "Item": "Helado Bombón Escocés",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Postres",
+    "Subsección": "Helados",
+    "Item": "Helado Almendrado",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Infusiones - Café",
+    "Subsección": "",
+    "Item": "Café chico",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Infusiones - Café",
+    "Subsección": "",
+    "Item": "Café jarrito",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Infusiones - Café",
+    "Subsección": "",
+    "Item": "Té",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Gaseosa 330 cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Línea Coca Cola y Pepsi",
+    "nota": "",
+    "Precio": ""
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Agua c/gas 500cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Soda Sifón",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Agua Saborizada 500cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Pomelo, Manzana, Naranja",
+    "nota": "",
+    "Precio": ""
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Limonada Jarra 1L",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Limonada Jarra 1/2L",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "",
+    "Item": "Terna Cuyano / Serrano",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Sin Alcohol",
+    "Subsección": "Cerveza sin Alcohol",
+    "Item": "Quilmes 350 ml",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Cervezas",
+    "Item": "Patagonia 730cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Cervezas",
+    "Item": "Stella Artois 975cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Cervezas",
+    "Item": "Stella Artois Negra 473cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Cervezas",
+    "Item": "Corona 710 cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Cervezas",
+    "Item": "Corona 310 cc",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Especiales",
+    "Item": "Clericó 1L",
+    "nota": "Fruta de estación + Vino blanco",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Especiales",
+    "Item": "Clericó 1L",
+    "nota": "Especialidad de El Faro",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Especiales",
+    "Item": "Sangría 1L",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Especiales",
+    "Item": "Lemon Champ Jarra",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Fernet Media",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Gancia",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Gin Tonic",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Campari",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Ron",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Baileys",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Tragos",
+    "Item": "Limoncello",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Whisky",
+    "Item": "Blender",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Whisky",
+    "Item": "Johnnie Walker etiq. Roja",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Whisky",
+    "Item": "Johnnie Walker etiq. Negra",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Con Alcohol",
+    "Subsección": "Whisky",
+    "Item": "Vat69",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Menú Infantil",
+    "Subsección": "",
+    "Item": "Milanesa de ternera + fritas",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Menú Infantil",
+    "Subsección": "",
+    "Item": "Choripán + fritas",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Menú Infantil",
+    "Subsección": "",
+    "Item": "Bife a la parrilla + fritas",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Menú Infantil",
+    "Subsección": "",
+    "Item": "Cubierto mayores de 5 años",
+    "nota": "",
+    "Precio": "$"
+  },
+  {
+    "Sección": "Menú Opcional",
+    "Subsección": "",
+    "Item": "P. Vegetariana",
+    "nota": "Cebolla, Tomate, Zucchini, Morrón Amarillo, Rojo y Verde, Berenjena, Champignon, Zanahoria, Anquito",
+    "Precio": "$"
+  }
+]
