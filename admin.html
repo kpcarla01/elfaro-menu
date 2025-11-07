@@ -61,16 +61,21 @@
     </div>
   </div>
 
+  <!-- === CARGAR GITHUB_TOKEN DESDE RENDER === -->
   <script>
-    // === CREDENCIALES OCULTAS (NO SE VEN EN CÓDIGO FUENTE) ===
+    // Render inyecta variables como window.GITHUB_TOKEN
+    const GITHUB_TOKEN = window.GITHUB_TOKEN;
+    if (!GITHUB_TOKEN) {
+      document.body.innerHTML = '<h2 style="color:red; text-align:center;">Error: GITHUB_TOKEN no configurado en Render</h2>';
+      throw new Error("Falta GITHUB_TOKEN");
+    }
+
+    // === CREDENCIALES OCULTAS (HASH) ===
     const hash = (str) => {
       let h = 0;
-      for (let i = 0; i < str.length; i++) {
-        h = (h * 31 + str.charCodeAt(i)) & 0xFFFFFFFF;
-      }
+      for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) & 0xFFFFFFFF;
       return h.toString(16);
     };
-
     const validUsers = {
       [hash("faro")]: hash("Faro2025*"),
       [hash("lalym")]: hash("Progreso2025*")
@@ -82,27 +87,12 @@
     const REPO = "kpcarla01/elfaro-menu";
     const PATH = "menu.json";
 
-    // === TOKEN DE GITHUB (SEGURÍSIMO) ===
-    let GITHUB_TOKEN = localStorage.getItem('elfaro_github_token');
-    if (!GITHUB_TOKEN) {
-      GITHUB_TOKEN = prompt("Token de GitHub requerido (solo para admin):");
-      if (GITHUB_TOKEN && GITHUB_TOKEN.startsWith('ghp_')) {
-        localStorage.setItem('elfaro_github_token', GITHUB_TOKEN);
-      } else {
-        alert("Token inválido. Contactá al administrador.");
-        location.href = '/';
-      }
-    }
-
     function login() {
       const user = document.getElementById('user').value.trim().toLowerCase();
       const pass = document.getElementById('pass').value;
       const errorMsg = document.getElementById('error-msg');
 
-      const userHash = hash(user);
-      const passHash = hash(pass);
-
-      if (validUsers[userHash] === passHash) {
+      if (validUsers[hash(user)] === hash(pass)) {
         level = user === 'faro' ? 'precio' : 'todo';
         document.querySelector('.login').style.display = 'none';
         document.getElementById('editor').style.display = 'block';
@@ -179,12 +169,12 @@
         const file = await res.json();
         let current = file.content ? JSON.parse(atob(file.content)) : [];
 
-        Object.values(changes).forEach((row, idx) => {
-          const i = Object.keys(changes).find(k => changes[k] === row);
+        Object.entries(changes).forEach(([i, row]) => {
           if (level === 'precio') {
             if (current[i]) current[i].Precio = row.Precio;
           } else {
-            Object.assign(current[i] || {}, row);
+            if (!current[i]) current[i] = {};
+            Object.assign(current[i], row);
           }
         });
 
@@ -214,7 +204,7 @@
       reader.onload = async function(e) {
         const csv = e.target.result;
         const data = parseCSV(csv);
-        if (data.length === 0) return showStatus('CSV vacío o inválido', 'error');
+        if (data.length === 0) return showStatus('CSV vacío', 'error');
 
         try {
           const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
@@ -231,11 +221,9 @@
           if (response.ok) {
             showStatus('JSON generado y guardado!', 'success');
             setTimeout(() => loadMenu(), 2000);
-          } else {
-            showStatus('Error al guardar CSV', 'error');
           }
         } catch (e) {
-          showStatus('Error de conexión', 'error');
+          showStatus('Error al subir CSV', 'error');
         }
       };
       reader.readAsText(file);
@@ -252,7 +240,7 @@
         const row = {};
         headers.forEach((h, j) => {
           let val = values[j] || '';
-          if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+          if (val.startsWith('"') && val.endsWith('"')) valLess = val.slice(1, -1);
           row[h] = val;
         });
         const map = { 'Sección': 'Sección', 'Subsección': 'Subsección', 'Item': 'Item', 'nota': 'Nota', 'Precio': 'Precio' };
@@ -288,6 +276,11 @@
       s.textContent = msg;
       s.className = 'status ' + type;
     }
+  </script>
+
+  <!-- === RENDER INYECTA EL TOKEN AQUÍ === -->
+  <script>
+    window.GITHUB_TOKEN = "{{GITHUB_TOKEN}}";
   </script>
 </body>
 </html>
