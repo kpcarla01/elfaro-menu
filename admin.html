@@ -17,10 +17,13 @@
     .readonly { background: #f8f9fa !important; color: #6c757d; }
     .precio { font-weight: bold; color: #d32f2f; }
     .save-btn { background: #28a745; color: white; padding: 15px 30px; border: none; border-radius: 6px; font-size: 18px; cursor: pointer; margin: 20px 0; }
+    .csv-btn { background: #17a2b8; color: white; padding: 15px 30px; border: none; border-radius: 6px; font-size: 18px; cursor: pointer; margin: 10px; }
     .status { margin: 15px 0; padding: 12px; border-radius: 6px; font-weight: bold; }
     .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
     .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     #editor { display: none; }
+    .csv-upload { margin: 20px 0; padding: 15px; border: 2px dashed #ddd; border-radius: 6px; text-align: center; }
+    .csv-upload input { margin: 10px; }
   </style>
 </head>
 <body>
@@ -36,6 +39,17 @@
 
     <div id="editor">
       <div id="status"></div>
+      
+      <!-- BOTÓN CSV SOLO PARA LALYM -->
+      <div id="csv-section" style="display:none;">
+        <div class="csv-upload">
+          <h3>📊 Subir CSV del Google Sheet (solo lalym)</h3>
+          <p>Descargá el CSV de tu Google Sheet y súbelo aquí. Se genera el JSON automáticamente.</p>
+          <input type="file" id="csv-file" accept=".csv" />
+          <button class="csv-btn" onclick="uploadCSV()">Generar JSON desde CSV</button>
+        </div>
+      </div>
+
       <table id="table">
         <thead>
           <tr>
@@ -64,6 +78,9 @@
         level = u === 'faro' ? 'precio' : 'todo';
         document.querySelector('.login').style.display = 'none';
         document.getElementById('editor').style.display = 'block';
+        if (level === 'todo') {
+          document.getElementById('csv-section').style.display = 'block';
+        }
         showStatus(`Bienvenido, ${u === 'faro' ? 'Faro' : 'Lalym'}.`, 'success');
         loadMenu();
       } else showStatus('Usuario o contraseña incorrectos', 'error');
@@ -108,6 +125,49 @@
         showStatus(msg.includes('exito') ? 'Guardado!' : msg, msg.includes('exito') ? 'success' : 'error');
         if (msg.includes('exito')) setTimeout(() => location.reload(), 1500);
       });
+    }
+
+    function uploadCSV() {
+      const fileInput = document.getElementById('csv-file');
+      const file = fileInput.files[0];
+      if (!file) return showStatus('Selecciona un CSV', 'error');
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const csv = e.target.result;
+        const data = parseCSV(csv);
+        if (data.length === 0) return showStatus('CSV vacío o inválido', 'error');
+
+        fetch('/.netlify/functions/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data, level: 'todo' })
+        })
+        .then(r => r.text())
+        .then(msg => {
+          showStatus(msg.includes('exito') ? 'JSON generado y guardado!' : msg, msg.includes('exito') ? 'success' : 'error');
+          if (msg.includes('exito')) {
+            setTimeout(() => location.reload(), 1500);
+          }
+        });
+      };
+      reader.readAsText(file);
+    }
+
+    function parseCSV(csv) {
+      const lines = csv.split('\n');
+      const headers = lines[0].split(',');
+      const data = [];
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',');
+        if (values.length < headers.length) continue;
+        const row = {};
+        headers.forEach((header, j) => {
+          row[header.trim()] = values[j].trim();
+        });
+        if (row.Item) data.push(row);
+      }
+      return data;
     }
 
     function showStatus(msg, type) {
