@@ -9,31 +9,30 @@ exports.handler = async (event) => {
     const repo = 'kpcarla01/elfaro-menu';
     const pathFile = 'menu.json';
 
-    // === LIMPIAR PRECIOS (quita puntos, comas, comillas) ===
+    // LIMPIAR PRECIOS
     data.forEach(row => {
       if (row.Precio) {
-        row.Precio = row.Precio
-          .replace(/[",.]/g, '')  // Quita comillas, comas y puntos
-          .trim();
+        row.Precio = row.Precio.replace(/[",.]/g, '').trim();
       }
     });
 
-    // === LEER ARCHIVO ACTUAL DE GITHUB ===
+    // LEER ARCHIVO ACTUAL
     let current = [];
+    let sha = null;
     try {
       const res = await fetch(`https://api.github.com/repos/${repo}/contents/${pathFile}`, {
         headers: { Authorization: `token ${token}`, 'User-Agent': 'netlify' }
       });
       const file = await res.json();
       if (file.content) {
-        const content = file.content.replace(/\n/g, '');
-        current = JSON.parse(Buffer.from(content, 'base64').toString('utf-8'));
+        current = JSON.parse(Buffer.from(file.content, 'base64').toString('utf-8'));
+        sha = file.sha;
       }
     } catch (e) {
-      console.log('No existe menu.json, se creará uno nuevo');
+      console.log('Archivo no existe, se creará');
     }
 
-    // === ACTUALIZAR SEGÚN NIVEL ===
+    // ACTUALIZAR DATOS
     if (level === 'precio') {
       data.forEach((row, i) => {
         if (current[i]) current[i].Precio = row.Precio;
@@ -42,28 +41,10 @@ exports.handler = async (event) => {
       current = data;
     }
 
-    // === CONVERTIR A BASE64 (UTF-8 seguro) ===
-    function utf8ToBase64(str) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(str);
-      let binary = '';
-      data.forEach(byte => binary += String.fromCharCode(byte));
-      return Buffer.from(binary, 'binary').toString('base64');
-    }
+    // BASE64 UTF-8
+    const content = Buffer.from(JSON.stringify(current, null, 2)).toString('base64');
 
-    const content = utf8ToBase64(JSON.stringify(current, null, 2));
-
-    // === OBTENER SHA ACTUAL (para actualizar) ===
-    let sha = null;
-    try {
-      const res = await fetch(`https://api.github.com/repos/${repo}/contents/${pathFile}`, {
-        headers: { Authorization: `token ${token}`, 'User-Agent': 'netlify' }
-      });
-      const file = await res.json();
-      sha = file.sha;
-    } catch (e) {}
-
-    // === GUARDAR EN GITHUB ===
+    // GUARDAR EN GITHUB (SIEMPRE CON SHA ACTUAL)
     const response = await fetch(`https://api.github.com/repos/${repo}/contents/${pathFile}`, {
       method: 'PUT',
       headers: {
@@ -74,7 +55,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         message: level === 'precio' ? 'Actualizar precios' : 'Actualizar menú desde CSV',
         content,
-        sha
+        sha // SIEMPRE INCLUIR SHA
       })
     });
 
@@ -86,7 +67,7 @@ exports.handler = async (event) => {
     }
 
   } catch (error) {
-    console.error('Error en save.js:', error);
+    console.error('Error:', error);
     return { statusCode: 500, body: `Error: ${error.message}` };
   }
 };
